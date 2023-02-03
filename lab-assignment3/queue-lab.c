@@ -7,7 +7,7 @@ static int front=-1;
 int isempty()
 {   
     if(rear==-1)
-        return 1; // originally 
+        return 1; // originally boolean value 
     else
         return 0;
 }
@@ -15,14 +15,16 @@ int isempty()
 /*-----To check if the queue is full----------*/
 int isfull()
 {
-    if(rear==N-1)
+    if(rear == N-1) {
+        printf("Queue is full\n");
         return 1;
+    }
     return 0;
  
 }
 
 /*---- To see the data at the front of the queue---*/
-int peek(int *arr)
+int peek(int* arr)
 {
     if(isempty()){
         printf("Queue is empty.\n");
@@ -32,38 +34,35 @@ int peek(int *arr)
 }
 
 /*---To insert the elements into the queue------*/
-void enqueue(int data, int *arr)
+void enqueue(int data, int* arr)
 {
     //insert your code here
-    if (isfull()){
+    if (isfull()) {
         return;
     } 
-    if (front == -1){
-        front = 0;
-    }
     rear = rear + 1;
     arr[rear] = data;
-
-        // if (rear== N-1) {
-        //     *arr = -1;
-        // }
-        // rear++;
-        // *arr = data;
+    printf("Enqueued element is: %d\n", data);
 }
 
 /*----Function to remove the elements from the queue----*/
-int dequeue(int *arr)
+int dequeue(int* arr)
 {   
     //insert your code here
     if (isempty()) {
         return 0;
     } 
-    int res = arr[front];
+    
+    int res = arr[front + 1];
+
     if (front == rear) {
         front = -1;
         rear = -1;
     } else {
-        front++;
+        rear = rear - 1;
+        for (int i = front; i < rear + 1; i++) {
+            arr[i] = arr[i+1];
+        }
     }
     return res;
 }
@@ -82,7 +81,7 @@ void display(int *arr)
         
         for(i=front+1; i<=rear; i++)
         {
-            printf("Enqueued data is %d\n",arr[i]);
+            printf("%d ",arr[i]);
         }
 
     }
