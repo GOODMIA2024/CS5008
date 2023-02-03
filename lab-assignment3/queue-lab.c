@@ -1,3 +1,6 @@
+// name: Minjia Tao
+// email: tao.mi@northeastern.edu
+
 #include <stdio.h>
 #define N 8 //Max. capacity of Queue
 
