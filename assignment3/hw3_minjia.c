@@ -37,6 +37,9 @@ typedef struct nd {
   struct nd* right_p;
 } node_t;
 
+// left_p: a pointer to another structure of type nd.
+// right_p: a pointer to another structure of type nd.
+
 // create new node with value d and NULL left & right pointers
 node_t* newNode (int d) {
   node_t* n_p = NULL;                     // temp pointer to hold new node
@@ -65,17 +68,18 @@ void freeNode (node_t* n_p) {
 typedef struct q {
   node_t* head_p;
   node_t* tail_p;
-} queue_t;
+} queue_t; // 1. 为什么要引入node_t
 
 // create new empty queue (head and tail are set to NULL)
 queue_t* newQueue() {
   queue_t* q_p;   // temp pointer to hold newly created queue
 
   // ***** INSERT YOUR CODE HERE *****
-  q_p = (queue_t *)malloc(sizeof(queue_t));
+  q_p = (queue_t*)malloc(sizeof(queue_t)); // allocate memory for queue_t
   q_p->head_p = NULL;
-  q_p->tail_p = NULL;
-
+  q_p->tail_p = NULL; // 3.箭头可以理解成field. 吗？就相当于struct.，但是这里使用->是因为前面是一个pointer
+  //4. 需要写head和tail互相指向吗？
+  
   return q_p;
 };
 
@@ -84,10 +88,9 @@ bool isEmpty(queue_t* q_p) {
   bool b = true;   // temporary bool to hold return value - initalize to default value
 
   // ***** INSERT YOUR CODE HERE *****
-  if (q_p && q_p->head_p) {
-    b = false;
-  }
-  
+  if (!(q_p->head_p == NULL && q_p->tail_p == NULL)) {
+    b = false;  //2. 为什么有的时候是false/true，有的时候是0和1
+  }  
   return b;
 };
 
@@ -96,23 +99,32 @@ void enqueue(queue_t* q_p, int d) {
   node_t* n_p = NULL; // temp node pointer
   
   if (q_p != NULL) {
-
+    n_p = (node_t*)malloc(sizeof(node_t));// 这里需要malloc吗？对应的，后面需要free吗？
     if (isEmpty(q_p)) {
       // queue is empty so insertion is easy
 
       // ***** INSERT YOUR CODE HERE *****
-      n_p = newNode(d);
+      n_p->data = d;
+      n_p->right_p = NULL;
+      n_p->left_p = NULL;
+    
+
       q_p->head_p = n_p;
-      q_p->tail_p = q_p->head_p;
+      q_p->tail_p = n_p;
+      // n_p->right_p = q_p->head_p;
+      // n_p->left_p = q_p->tail_p;
+
     } else {
       // queue is not empty
 
       // ***** INSERT YOUR CODE HERE *****
-      n_p = newNode(d);
-      n_p->right_p = NULL;
-      n_p->left_p = q_p->tail_p;
-      n_p->left_p->right_p = n_p;
+      n_p->data = d;
+      node_t* next = q_p->tail_p;
       q_p->tail_p = n_p;
+      n_p->right_p = next;
+      n_p->left_p = NULL;
+      next->left_p = n_p;
+
     }    
   }
   
@@ -122,29 +134,37 @@ void enqueue(queue_t* q_p, int d) {
 // function to take the node off the head of the queue and return its value
 int dequeue(queue_t* q_p) {
   int t = -9999;      // temp int to hold return val with arbitrary error value of -9999
-  node_t* n_p = NULL; // temp node poitner
+  node_t* n_p = NULL; // temp node pointer
   
   if (q_p != NULL) {
     n_p = q_p->head_p;  // get a pointer to the head of the queue
 
     if (n_p != NULL) {
-      t = n_p->data;      // get the value of data in the head of the queue
+	    t = n_p->data;      // get the value of data in the head of the queue
 
-      if (q_p->head_p  == q_p->tail_p) {      
-        // only one node in the queue, clear queue head and tail 
-        
-        // ***** INSERT YOUR CODE HERE *****
-        q_p->head_p = NULL;
-        q_p->tail_p = NULL;
-      } else {
-        // mulitple nodes in queue, clean up head pointer and new head of queue
+    if (q_p->head_p  == q_p->tail_p) {      
+      // only one node in the queue, clear queue head and tail 
 
-        // ***** INSERT YOUR CODE HERE *****
-        q_p->head_p = n_p->right_p;
-        q_p->head_p->left_p = NULL;
-      }
+      // ***** INSERT YOUR CODE HERE *****
+      //1.which one is correct?
+      q_p->head_p = NULL;
+      q_p->tail_p = NULL;
+
+      // //2.
+      // q_p->head_p = NULL;
+      // q_p->tail_p = q_p->head_p;
+
       
-      freeNode(n_p);  // free up the node that was dequeued
+    } else {
+            // mulitple nodes in queue, clean up head pointer and new head of queue
+
+      // ***** INSERT YOUR CODE HERE *****
+      
+      q_p->head_p = q_p->head_p->left_p;
+      q_p->head_p->right_p = NULL;
+    }
+	
+	  freeNode(n_p);  // free up the node that was dequeued
     }
   }
     
