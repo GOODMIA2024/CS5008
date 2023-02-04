@@ -11,7 +11,7 @@ void insertion_sort(int* arr, int* sort, int count)
 {
     for(int i = 1; i < count; i++) {
         sort[i] = arr[i];
-        int j = i;
+        int j = i - 1;
         while (j > 0 && sort[j - 1] > sort[j]) {
             int temp = sort[j];
             sort[j] = sort[j-1];
@@ -20,6 +20,7 @@ void insertion_sort(int* arr, int* sort, int count)
                  //bubble sort从尾开始放置每一次valid element
         }
     }
+    //return 1;     // Question: need a return statement for the function
 }
 
 int main()
