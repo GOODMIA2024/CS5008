@@ -54,13 +54,14 @@ void selection_sort_2arr(int* source, int* dest, bool* valid) // valid is an arr
     // INSERT YOUR CODE HERE
 
     // cannot initialize the smallest as source[i] since it will ask for more restriction
-    smallest = RAND_RANGE + 1; // the upper bound of all the random numbers，找到全部数组中的最大值
-    //     // for(int j = 0; j < LIMIT; j++) { // question: consider for the duplicates?
+        //     // for(int j = 0; j < LIMIT; j++) { // question: consider for the duplicates?
     //     //   if (valid[j]) {
     //     //     smallest = j; //  这边不对
     //     //     break;
     //     //   }
     //     // }
+    
+    smallest = RAND_RANGE + 1; // the upper bound of all the random numbers，找到全部数组中的最大值
 
     // find the smallest number and its index in the source array
     for(int j = 0; j < LIMIT; j++) { // question: consider for the duplicates?
