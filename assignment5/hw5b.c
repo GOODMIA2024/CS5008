@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Minjia Tao
+// email: tao.mi@northeastern.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -37,7 +37,31 @@ char upperChar(char c){
 void quicky(char* data, int left, int right) {
 
   // ADD YOUR CODE HERE
-
+  if (right <= left) {
+    return;
+  }
+  char pivot = data[right];
+  char temp[right - left + 1];
+  int j = 0;
+  int k = right - left;
+  for (int l = left; l < right; l++) {
+    if (upperChar(data[l]) > upperChar(pivot)) {
+      temp[k] = data[l];
+      k--;
+    }
+    else {
+      temp[j] = data[l];
+      j++;
+    }
+  }
+  temp[j] = pivot;
+  int a = 0;
+  for (int i = left; i <= right; i++) {
+    data[i] = temp[a];
+    a++;
+  }
+  quicky(data, left, left + j - 1);
+  quicky(data, left + j + 1, right);
   return;
 }
 
@@ -64,7 +88,7 @@ int main(){
   for (i=0; i < ((LIMIT/20)+1); i++) {
     for (j=0; j<20; j++) {
       if (i*20+j < LIMIT) {
-	printf("%c ",source[i*20+j]);
+	      printf("%c ",source[i*20+j]);
       }
     }
     printf("\n");
@@ -80,7 +104,7 @@ int main(){
   for (i=0; i < ((LIMIT/10)+1); i++) {
     for (j=0; j<10; j++) {
       if (i*10+j < LIMIT) {
-	printf("%c ",source[i*10+j]);
+	      printf("%c ",source[i*10+j]);
       }
     }
     printf("\n");

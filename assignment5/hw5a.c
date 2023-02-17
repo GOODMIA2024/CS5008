@@ -1,5 +1,5 @@
-// name: <your name here>
-// email: <your email here>
+// name: Minjia Tao
+// email: tao.mi@northeastern.edu
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -22,34 +22,64 @@ char randChar() {
 // return location mid way between left and right
 int midPoint(int left, int right){
   // note integer division always returns an integer
-  return( left + (right-left)/2 );
+  return(left + (right-left)/2);
 }
 
 // min of two integers
 int findMin(int a, int b){
-  if (a<=b) {return a;} else {return b;}
+  if (a <= b) {
+    return a;
+  } else {
+    return b;
+  }
 }
 
 // merge two sorted sub arrays
 void mergeIt(
-	   char* data,
-	   int leftStart,
-	   int leftStop,
-	   int rightStart,
-	   int rightStop) {
-  
-
+	char* data,
+	int leftStart,
+	int leftStop,
+	int rightStart,
+	int rightStop) 
+{
   // ADD YOUR CODE HERE
-  
+  int i = leftStart;
+  int j = rightStart;
+  int k = 0;
+  char temp[rightStop - leftStart + 1];
+  while (i <= leftStop && j <= rightStop) {
+    if (data[i] <= data[j]) {
+      temp[k] = data[i];
+      i++;
+    }
+    else {
+      temp[k] = data[j];
+      j++;
+    }
+    k++;
+  }
+  while (i <= leftStop) {
+    temp[k] = data[i];
+    i++;
+    k++;
+  }
+  while (j <= rightStop) {
+    temp[k] = data[j];
+    j++;
+    k++;
+  }
+  int a = 0;
+  for (i = leftStart; i <= rightStop; i++) {
+    data[i] = temp[a];
+    a++;
+  }
   return;
 }
-
 
 
 // break data array up into halves until down to single elements
 // then merge them
 void msort(char* data, int left, int right) {
-
   if (left >= right) {
     // base case of 1 element
     return;
@@ -93,7 +123,7 @@ int main(){
   for (i=0; i < ((LIMIT/20)+1); i++) {
     for (j=0; j<20; j++) {
       if (i*20+j < LIMIT) {
-	printf("%c ",source[i*20+j]);
+	      printf("%c ",source[i*20+j]);
       }
     }
     printf("\n");
@@ -109,7 +139,7 @@ int main(){
   for (i=0; i < ((LIMIT/10)+1); i++) {
     for (j=0; j<10; j++) {
       if (i*10+j < LIMIT) {
-	printf("%c ",source[i*10+j]);
+	      printf("%c ",source[i*10+j]);
       }
     }
     printf("\n");
