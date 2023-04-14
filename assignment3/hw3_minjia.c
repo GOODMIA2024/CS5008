@@ -160,7 +160,7 @@ int dequeue(queue_t* q_p) {
 
       // ***** INSERT YOUR CODE HERE *****
       
-      q_p->head_p = q_p->head_p->left_p;
+      q_p->head_p = q_p->head_p->left_p; // left是前面的， right是后面的
       q_p->head_p->right_p = NULL;
     }
 	
