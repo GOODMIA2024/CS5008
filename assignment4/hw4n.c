@@ -38,28 +38,28 @@ void selection_sort_2arr(int* source, int* dest, bool* valid) // valid is an arr
   int smallest;      // current smallest element
   int smallestIndex;  // initialize the index for the smallest number
   for (int i = 0; i < LIMIT; i++) {
-//     smallestIndex = i;
-//     for (int j = i + 1; j < LIMIT; j++) {
-//       if (source[j] < source[smallestIndex]) {
-//         smallestIndex = j;
-//       }
-//       if (smallestIndex != i) {
-//         int temp = source[smallest];
-//         source[smallest] = source[i];
-//         source[i] = temp;
-//       }
-//     }
-//   }
-// }
     // INSERT YOUR CODE HERE
+    //     smallestIndex = i;
+    //     for (int j = i + 1; j < LIMIT; j++) {
+    //       if (source[j] < source[smallestIndex]) {
+    //         smallestIndex = j;
+    //       }
+    //       if (smallestIndex != i) {
+    //         int temp = source[smallest];
+    //         source[smallest] = source[i];
+    //         source[i] = temp;
+    //       }
+    //     }
+    //   }
+    // }
 
     // cannot initialize the smallest as source[i] since it will ask for more restriction
-        //     // for(int j = 0; j < LIMIT; j++) { // question: consider for the duplicates?
-    //     //   if (valid[j]) {
-    //     //     smallest = j; //  这边不对
-    //     //     break;
-    //     //   }
-    //     // }
+        // for(int j = 0; j < LIMIT; j++) { // question: consider for the duplicates?
+        //   if (valid[j]) {
+        //     smallest = j; //  这边不对
+        //     break;
+        //   }
+        // }
     
     smallest = RAND_RANGE + 1; // the upper bound of all the random numbers，找到全部数组中的最大值
 
